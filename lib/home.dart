@@ -10,7 +10,13 @@ class Home extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text("To Do List")),
-      body: Column(children: const [TodoCard(), TodoCard()]),
+      body: Column(children: const [
+        TodoCard(
+          task: "Task1",
+          dueDate: "01/01/22",
+        ),
+        TodoCard(task: "Task2", dueDate: "01/01/23")
+      ]),
     );
   }
 }
