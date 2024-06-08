@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
-import 'package:todolist/todo_card.dart';
+import 'package:todolist/screens/home/todo_card.dart';
 
 class Home extends StatelessWidget {
   const Home({super.key});
@@ -10,7 +10,7 @@ class Home extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text("To Do List")),
-      body: Column(children: const [
+      body: ListView(children: const [
         TodoCard(
           task: "Task1",
           dueDate: "01/01/22",
