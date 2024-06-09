@@ -5,8 +5,15 @@ import 'package:flutter/src/widgets/placeholder.dart';
 class TodoCard extends StatefulWidget {
   final String task;
   final String dueDate;
+  final int keyVal;
+  final VoidCallback onDelete;
 
-  TodoCard({super.key, required this.task, required this.dueDate});
+  const TodoCard(
+      {super.key,
+      required this.keyVal,
+      required this.task,
+      required this.dueDate,
+      required this.onDelete});
 
   @override
   State<TodoCard> createState() => _TodoCardState();
@@ -19,13 +26,6 @@ class _TodoCardState extends State<TodoCard> {
     setState(() {
       _completed = !_completed;
     });
-
-    print(widget.task);
-    print(_completed);
-  }
-
-  void _handleDeleteButtonPressed() {
-    print('del presssed');
   }
 
   @override
@@ -47,7 +47,7 @@ class _TodoCardState extends State<TodoCard> {
               ),
               const SizedBox(width: 10),
               ElevatedButton(
-                onPressed: _handleDeleteButtonPressed,
+                onPressed: widget.onDelete,
                 child: const Icon(Icons.close),
               )
             ]),
