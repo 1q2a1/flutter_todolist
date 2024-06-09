@@ -2,13 +2,30 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 
-class TodoCard extends StatelessWidget {
+class TodoCard extends StatefulWidget {
   final String task;
   final String dueDate;
-  const TodoCard({super.key, required this.task, required this.dueDate});
+
+  TodoCard({super.key, required this.task, required this.dueDate});
+
+  @override
+  State<TodoCard> createState() => _TodoCardState();
+}
+
+class _TodoCardState extends State<TodoCard> {
+  bool _completed = false;
 
   void _handleDoneButtonPressed() {
-    print('done');
+    setState(() {
+      _completed = !_completed;
+    });
+
+    print(widget.task);
+    print(_completed);
+  }
+
+  void _handleDeleteButtonPressed() {
+    print('del presssed');
   }
 
   @override
@@ -19,17 +36,19 @@ class TodoCard extends StatelessWidget {
         children: <Widget>[
           ListTile(
             leading: const Icon(Icons.assignment),
-            title: Text(task),
-            subtitle: Text("Due: $dueDate"),
+            title: Text(widget.task,
+                style: TextStyle(
+                    decoration: _completed ? TextDecoration.lineThrough : TextDecoration.none)),
+            subtitle: Text("Due: ${widget.dueDate}"),
             trailing: Row(mainAxisSize: MainAxisSize.min, children: [
               ElevatedButton(
+                onPressed: _handleDoneButtonPressed,
                 child: const Icon(Icons.check),
-                onPressed: () {},
               ),
               const SizedBox(width: 10),
               ElevatedButton(
+                onPressed: _handleDeleteButtonPressed,
                 child: const Icon(Icons.close),
-                onPressed: () {},
               )
             ]),
           ),
